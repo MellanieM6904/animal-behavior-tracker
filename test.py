@@ -28,12 +28,12 @@ with ui.tab_panels(tabs, value=one).classes('w-full'):
                     ui.button("Walk", color = "#A7C7A3").on("click", lambda: events.on_behavior("Walk", name, temp, bid))
                     ui.label("[5]").style("font-size: 150%; font-weight: 300")
 
+        ui.keyboard(on_key = lambda e: events.handle_key(e, name, temp, bid))
+
     with ui.tab_panel(two):
         with ui.card().classes("max-w-3xl mx-auto shadow-lg"):
             with ui.row().classes("w-full justify-center"):
-                ui.button("Download Results (.csv)", color = "#A7C7A3")
+                ui.button("Download Results (.csv)", color = "#A7C7A3").on("click", lambda: events.download_res())
 
-
-        ui.keyboard(on_key=lambda e: events.handle_key(e, name, temp, bid))
 
 ui.run()
