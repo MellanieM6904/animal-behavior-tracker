@@ -3,18 +3,21 @@ import datetime
 from nicegui import events, ui
 import io, csv
 
-def on_behavior(activity, name, temp, id):
+def on_behavior(activity, name, temp, id, treatment, exposure):
     if name.value == '': ui.notify(f"Please enter name, green house temp, and butterfly id to record")
     if temp.value == '': ui.notify(f"Please enter name, green house temp, and butterfly id to record")
     if id.value == '': ui.notify(f"Please enter name, green house temp, and butterfly id to record")
-    
+
     behavs = {
         "Land": 0,
         "Bask": 1,
         "Fly": 2,
         "Feed": 3,
         "Flutter": 4,
-        "Walk": 5
+        "Walk": 5,
+        "Puddling": 6,
+        "Start": 7,
+        "End of Experiment": 8
     }
 
     behav = behavs[activity]
@@ -23,19 +26,21 @@ def on_behavior(activity, name, temp, id):
         time = datetime.datetime.today(),
         activity = behav,
         temp = temp.value,
-        user = name.value
+        user = name.value,
+        treatment = treatment.value,
+        exposure = exposure.value
     )
 
     ui.notify(f"{activity} @ {datetime.datetime.today()} recorded")
 
-def handle_key(e: events.KeyEventArguments, name, temp, id):
+def handle_key(e: events.KeyEventArguments, name, temp, id, treatment, exposure):
     if name.value == '': ui.notify(f"Please enter name, green house temp, and butterfly id to record")
     if temp.value == '': ui.notify(f"Please enter name, green house temp, and butterfly id to record")
     if id.value == '': ui.notify(f"Please enter name, green house temp, and butterfly id to record")
 
     if e.action.keyup: return # Prevent duplicate recording
     behav = int(e.key.name)
-    if behav not in range(0, 6): 
+    if behav not in range(0, 9): 
         ui.notify(f"{behav}: Invalid behavior, select another behavior")
         return
     
@@ -44,7 +49,9 @@ def handle_key(e: events.KeyEventArguments, name, temp, id):
         time = datetime.datetime.today(),
         activity = behav,
         temp = float(temp.value),
-        user = name.value
+        user = name.value,
+        treatment = treatment.value,
+        exposure = exposure.value
     )
 
     ui.notify(f"{behav} @ {datetime.datetime.today()} recorded")

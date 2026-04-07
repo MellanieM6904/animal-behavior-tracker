@@ -20,3 +20,5 @@ class Activities(BaseModel):
     activity = IntegerField()
     temp = FloatField()
     user = CharField()
+    treatment = CharField()
+    exposure = BooleanField() # True for experimental exposure, False for observation
