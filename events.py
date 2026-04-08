@@ -16,8 +16,11 @@ def on_behavior(activity, name, temp, id, treatment, exposure):
         "Flutter": 4,
         "Walk": 5,
         "Puddling": 6,
-        "Start": 7,
-        "End of Experiment": 8
+        "Reproductive": 7,
+        "Thistle": 8,
+        "Socializing": 9,
+        "Start": 10,
+        "End of Experiment": 11
     }
 
     behav = behavs[activity]
@@ -40,7 +43,7 @@ def handle_key(e: events.KeyEventArguments, name, temp, id, treatment, exposure)
 
     if e.action.keyup: return # Prevent duplicate recording
     behav = int(e.key.name)
-    if behav not in range(0, 9): 
+    if behav not in range(0, 10): 
         ui.notify(f"{behav}: Invalid behavior, select another behavior")
         return
     

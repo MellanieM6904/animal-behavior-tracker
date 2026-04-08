@@ -14,8 +14,9 @@ with ui.tab_panels(tabs, value=one).classes('w-full'):
                 name = ui.input("Your Name")
                 temp = ui.input("Greenhouse Temperature")
                 bid = ui.input("Butterfly ID")
-                treatment = ui.input("Control/Low/High")
+                treatment = ui.input("Control/Low/High") # Make dropdown selection
                 exposure = ui.checkbox("Experimental exposure?")
+                # Add M/F checkbox after Control observations
                 with ui.grid(columns = 2):
                     ui.button("Land/Perch", color = "#A7C7A3").on("click", lambda: events.on_behavior("Land", name, temp, bid, treatment, exposure))
                     ui.label("[0]").style("font-size: 150%; font-weight: 300")
@@ -31,10 +32,14 @@ with ui.tab_panels(tabs, value=one).classes('w-full'):
                     ui.label("[5]").style("font-size: 150%; font-weight: 300")
                     ui.button("Puddling", color = "#A7C7A3").on("click", lambda: events.on_behavior("Puddling", name, temp, bid, treatment, exposure))
                     ui.label("[6]").style("font-size: 150%; font-weight: 300")
-                    ui.button("Start Experiment", color = "#A7C7A3").on("click", lambda: events.on_behavior("Start", name, temp, bid, treatment, exposure))
+                    ui.button("Oviposit/Mating", color = "#A7C7A3").on("click", lambda: events.on_behavior("Reproductive", name, temp, bid, treatment, exposure))
                     ui.label("[7]").style("font-size: 150%; font-weight: 300")
-                    ui.button("End of Experiment", color = "#A7C7A3").on("click", lambda: events.on_behavior("End of Experiment", name, temp, bid, treatment, exposure))
+                    ui.button("[F] Land on thistle]", color = "#A7C7A3").on("click", lambda: events.on_behavior("Thistle", name, temp, bid, treatment, exposure))
                     ui.label("[8]").style("font-size: 150%; font-weight: 300")
+                    ui.button("[M] Socializing]", color = "#A7C7A3").on("click", lambda: events.on_behavior("Socializing", name, temp, bid, treatment, exposure))
+                    ui.label("[9]").style("font-size: 150%; font-weight: 300")
+                    ui.button("Start Experiment", color = "#A7C7A3").on("click", lambda: events.on_behavior("Start", name, temp, bid, treatment, exposure))
+                    ui.button("End of Experiment", color = "#A7C7A3").on("click", lambda: events.on_behavior("End of Experiment", name, temp, bid, treatment, exposure))
 
         ui.keyboard(on_key = lambda e: events.handle_key(e, name, temp, bid, treatment, exposure))
 
