@@ -3,8 +3,8 @@ import os
 
 db = MySQLDatabase(
     "mpDB",
-    user = os.environ["USER"],
-    password = os.environ["PSWD"],
+    user = "mellaniem",
+    password = "7minutes",
     host = "localhost",
     port = 3306
     )
@@ -22,3 +22,11 @@ class Activities(BaseModel):
     user = CharField()
     treatment = CharField()
     exposure = BooleanField() # True for experimental exposure, False for observation
+
+class Weights(BaseModel):
+    id = AutoField(primary_key = True)
+    user = CharField()
+    bid = IntegerField()
+    time = DateTimeField()
+    treatment = CharField()
+    weight = FloatField()

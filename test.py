@@ -4,8 +4,9 @@ import events
 from nicegui import app, ui
 
 with ui.tabs().classes('w-full') as tabs:
-    one = ui.tab('Record')
-    two = ui.tab('Results')
+    one = ui.tab('Observations')
+    two = ui.tab('Weights')
+    three = ui.tab('Results')
 
 with ui.tab_panels(tabs, value=one).classes('w-full'):
     with ui.tab_panel(one):
@@ -45,8 +46,19 @@ with ui.tab_panels(tabs, value=one).classes('w-full'):
 
     with ui.tab_panel(two):
         with ui.card().classes("max-w-3xl mx-auto shadow-lg"):
-            with ui.row().classes("w-full justify-center"):
-                ui.button("Download Results (.csv)", color = "#A7C7A3").on("click", lambda: events.download_res())
+            with ui.column().classes("w-full justify-center"):
+                with ui.row().classes("w-full justify-center"):
+                    n = ui.input("Your Name")
+                    b = ui.input("Butterfly ID")
+                    t = ui.input("Control/Low/High")
+                    w = ui.input("Weight (g)")
+                ui.button("Submit", color = "#A7C7A3").on("click", lambda: events.submit_weight(n, b, t, w))
+
+    with ui.tab_panel(three):
+        with ui.card().classes("max-w-3xl mx-auto shadow-lg"):
+            with ui.column().classes("w-full justify-center"):
+                ui.button("Download Observation Results (.csv)", color = "#A7C7A3").on("click", lambda: events.download_obs())
+                ui.button("Download Weight Results (.csv)", color = "#A7C7A3").on("click", lambda: events.download_weights())
 
 
 ui.run()

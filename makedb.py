@@ -4,8 +4,8 @@ import models
 
 try:
     conn = mariadb.connect(
-        user = os.environ["USER"],
-        password = os.environ["PSWD"],
+        user = "mellaniem",
+        password = "7minutes",
         host="localhost",
         port=3306
     )
@@ -20,4 +20,4 @@ sql = """CREATE DATABASE mpDB"""
 curr.execute(sql)
 conn.commit()
 
-models.db.create_tables([models.Activities])
+models.db.create_tables([models.Activities, models.Weights])
