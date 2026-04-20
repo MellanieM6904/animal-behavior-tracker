@@ -29,4 +29,5 @@ class Weights(BaseModel):
     bid = IntegerField()
     time = DateTimeField()
     treatment = CharField()
-    weight = FloatField()
+    weight_before = FloatField()
+    weight_after = FloatField()

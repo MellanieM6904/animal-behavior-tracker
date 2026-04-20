@@ -24,7 +24,7 @@ def on_behavior(activity, name, temp, bid, treatment, exposure):
         "Puddling": 6,
         "Reproductive": 7,
         "Thistle": 8,
-        "Socializing": 9,
+        "Sand": 9,
         "Start": 10,
         "End of Experiment": 11
     }
@@ -77,7 +77,7 @@ def handle_key(e: events.KeyEventArguments, name, temp, bid, treatment, exposure
 
     ui.notify(f"{behav} @ {datetime.datetime.today()} recorded")
 
-def submit_weight(name, bid, treatment, weight):
+def submit_weight(name, bid, treatment, wb, wa):
     if name.value == '':
         ui.notify(f"Please enter name, weight, treatment, and butterfly id to record")
         return
@@ -87,19 +87,17 @@ def submit_weight(name, bid, treatment, weight):
     if bid.value == '':
         ui.notify(f"Please enter name, weight, treatment, and butterfly id to record")
         return
-    if weight.value == '':
-        ui.notify(f"Please enter name, weight, treatment, and butterfly id to record")
-        return
 
     models.Weights.create(
         bid = int(bid.value),
         user = name.value,
         time = datetime.datetime.today(),
         treatment = treatment.value,
-        weight = weight.value
+        weight_before = wb.value,
+        weight_after = wa.value
     )
 
-    ui.notify(f"Weight {weight.value} for butterfly {bid.value} recorded")
+    ui.notify(f"Weights {wa.value, wb.value} for butterfly {bid.value} recorded")
 
 def download_obs():
     query = models.Activities.select()

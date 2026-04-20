@@ -37,7 +37,7 @@ with ui.tab_panels(tabs, value=one).classes('w-full'):
                     ui.label("[7]").style("font-size: 150%; font-weight: 300")
                     ui.button("[F] Land on thistle]", color = "#A7C7A3").on("click", lambda: events.on_behavior("Thistle", name, temp, bid, treatment, exposure))
                     ui.label("[8]").style("font-size: 150%; font-weight: 300")
-                    ui.button("[M] Socializing]", color = "#A7C7A3").on("click", lambda: events.on_behavior("Socializing", name, temp, bid, treatment, exposure))
+                    ui.button("Perch On Sand", color = "#A7C7A3").on("click", lambda: events.on_behavior("Sand", name, temp, bid, treatment, exposure))
                     ui.label("[9]").style("font-size: 150%; font-weight: 300")
                     ui.button("Start Experiment", color = "#A7C7A3").on("click", lambda: events.on_behavior("Start", name, temp, bid, treatment, exposure))
                     ui.button("End of Experiment", color = "#A7C7A3").on("click", lambda: events.on_behavior("End of Experiment", name, temp, bid, treatment, exposure))
@@ -51,8 +51,9 @@ with ui.tab_panels(tabs, value=one).classes('w-full'):
                     n = ui.input("Your Name")
                     b = ui.input("Butterfly ID")
                     t = ui.input("Control/Low/High")
-                    w = ui.input("Weight (g)")
-                ui.button("Submit", color = "#A7C7A3").on("click", lambda: events.submit_weight(n, b, t, w))
+                    wb = ui.input("Weight Before (g)")
+                    wa = ui.input("Weight After (g)")
+                ui.button("Submit", color = "#A7C7A3").on("click", lambda: events.submit_weight(n, b, t, wb, wa))
 
     with ui.tab_panel(three):
         with ui.card().classes("max-w-3xl mx-auto shadow-lg"):
